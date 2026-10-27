@@ -61,7 +61,9 @@ Enter your command:
 
 
         int command = scanner.nextInt();
+        scanner.nextLine();// we eat the new line
         switch(command) {
+            case 2 -> makeAndModel(scanner, inventory);
             case 5 -> addVehicle(scanner, inventory);
             case 6 -> appRunning = false;
             default -> System.out.println("Invalid Command");
@@ -87,6 +89,7 @@ Enter your command:
             int odometerReading = scanner.nextInt();
             System.out.print("Please enter the price: ");
             double price = scanner.nextDouble();
+            scanner.nextLine(); // we have to eat the new line
 
             //create the vehicle
             Vehicle newVehicle = new Vehicle(id, makeModel, color, odometerReading, price);
@@ -99,12 +102,21 @@ Enter your command:
             numberOfVehiclesInInventory++;
     }
 
-    public static String [] makeAndModel(Scanner scanner, int[] inventory){
+    // added a method to search the inventory by make and model
+    public static void makeAndModel(Scanner scanner, Vehicle[] inventory){
         System.out.print("Search make and model: ");
-        String makeAndModel = scanner.nextLine();
+        String search = scanner.nextLine().trim();
 
-        for(){
+        boolean found = false;
 
+        for(int i = 0; i < numberOfVehiclesInInventory; i++){
+            if(inventory[i].getMakeModel().equalsIgnoreCase(search)){
+                System.out.println(inventory[i].toString());
+                found = true;
+            }
+        }
+        if(!found){
+            System.out.println("No vehicles found matching: " + search);
         }
 
     }

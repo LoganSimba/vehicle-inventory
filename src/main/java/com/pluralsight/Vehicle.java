@@ -17,7 +17,7 @@ public class Vehicle {
     }
 
 
-    public long getVehicelId() {
+    public long getVehicleId() {
         return vehicelId;
     }
 
@@ -55,5 +55,14 @@ public class Vehicle {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + getVehicleId()
+                + " | Make/Model: " + getMakeModel()
+                + " | Color: " + getColor()
+                + " | Odometer: " + getOdometerReading()
+                + " | Price: $" + getPrice();
     }
 }
