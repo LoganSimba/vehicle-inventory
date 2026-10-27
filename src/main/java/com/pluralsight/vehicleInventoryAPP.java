@@ -13,7 +13,6 @@ public class vehicleInventoryAPP {
         //create an array that can hold 20 elements
         Vehicle[] inventory = new Vehicle[20];
 
-
         //create a variable that tells us how many vehivlles are in the array
         int count = inventory.length;
 
@@ -23,7 +22,7 @@ public class vehicleInventoryAPP {
         Vehicle vehicle3 = new Vehicle(1003L, "Ford Mustang", "Black", 15000, 32999.95);
         Vehicle vehicle4 = new Vehicle(1004L, "Chevrolet Tahoe", "White", 60000, 28950.75);
         Vehicle vehicle5 = new Vehicle(1005L, "BMW X5", "Gray", 28000, 44999.00);
-        Vehicle vehicle6 = new Vehicle(1006L, "BMW X6", "Blue", 30000, 44999.00);
+        Vehicle vehicle6 = new Vehicle(1006L, "BMW X6", "Blue", 30000, 65999.00);
 
 
         //add the Vehicle objects in the array
@@ -35,8 +34,6 @@ public class vehicleInventoryAPP {
         inventory[5] = vehicle6;
 
         numberOfVehiclesInInventory = 6;
-
-
         /*
         What do you want to do?
 1 - List all inventory
@@ -65,6 +62,7 @@ Enter your command:
         switch(command) {
             case 1 -> listAllVehicles(inventory);
             case 2 -> makeAndModel(scanner, inventory);
+            case 3 -> priceRange(scanner, inventory);
             case 4 -> searchByColor(scanner, inventory);
             case 5 -> addVehicle(scanner, inventory);
             case 6 -> appRunning = false;
@@ -109,6 +107,7 @@ Enter your command:
         System.out.print("Search make and model: ");
         String search = scanner.nextLine().trim();
 
+        //variable to track if we found a match
         boolean found = false;
 
         for(int i = 0; i < numberOfVehiclesInInventory; i++){
@@ -149,6 +148,28 @@ Enter your command:
         }
     }
 
+    //method to find the price range in our inventory
+    public static void priceRange(Scanner scanner, Vehicle[] inventory) {
+        System.out.print("Enter the minimum price: ");
+        double min = Double.parseDouble(scanner.nextLine().trim());
 
+        System.out.print("Enter the maximum price: ");
+        double max = Double.parseDouble(scanner.nextLine().trim());
+        // variable to track if we find a match
+        boolean found = false;
+
+        // iterate through the array to find price range
+        for (int i = 0; i < numberOfVehiclesInInventory; i++) {
+            double price = inventory[i].getPrice();
+            if (price >= min && price <= max) {
+                System.out.println(inventory[i]);
+                found = true;
+            }
+        }
+        // if no match found print a message
+        if (!found) {
+            System.out.println("No vehicles found between $" + min + " and $" + max);
+        }
     }
+}
 
