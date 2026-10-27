@@ -63,7 +63,9 @@ Enter your command:
         int command = scanner.nextInt();
         scanner.nextLine();// we eat the new line
         switch(command) {
+            case 1 -> listAllVehicles(inventory);
             case 2 -> makeAndModel(scanner, inventory);
+            case 4 -> searchByColor(scanner, inventory);
             case 5 -> addVehicle(scanner, inventory);
             case 6 -> appRunning = false;
             default -> System.out.println("Invalid Command");
@@ -72,7 +74,7 @@ Enter your command:
         }
         }
     }
-
+        // method to add the vehicle
         public static void addVehicle(Scanner scanner, Vehicle[] inventory){
             //ask all the questions
             System.out.print("Please enter the vehicle's id: ");
@@ -119,6 +121,25 @@ Enter your command:
             System.out.println("No vehicles found matching: " + search);
         }
 
+    }
+
+    // method to search the inventory by color
+    public static void searchByColor(Scanner scanner, Vehicle[] inventory){
+        System.out.println("Search a vehicle by color: ");
+        String search = scanner.nextLine();
+        //boolean to track if we found a match
+        boolean found = false;
+        //iterating through the inventory to find a color match
+        for(int i = 0; i < numberOfVehiclesInInventory; i++){
+            if(inventory[i].getColor().equalsIgnoreCase(search)){
+                System.out.println(inventory[i].toString());
+                found = true;
+            }
+        }
+        //if no match print a message
+        if(!found){
+            System.out.println("No vehicles found matching the color: " + search);
+        }
     }
 
     // added method to list all vehicles in the inventory
